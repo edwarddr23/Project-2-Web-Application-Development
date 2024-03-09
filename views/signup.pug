@@ -1,0 +1,29 @@
+extends layout.pug 
+
+block content 
+    h1 Sign up
+    p 
+        | Please select a username, and a password. Don't worry about any password rules here, we don't really care much about 
+        | protecting your information - so <code>helloworld</code> is just fine by us!
+    form(action="/signup" method="post")
+        section
+            label(for="first") First Name 
+            input(name="first", type="text" required)
+        section
+            label(for="last") Last Name
+            input(name="last", type="text" required)
+        section
+            label(for="username") Username
+            input(name="username", type="text" required)
+        section 
+            label(for="password") Password
+            input(name="password", type="password" required)
+        section
+            label(for="password2") Confirm Password
+            input(name="password2", type="password" required)
+        button(type="submit") Sign up 
+        a(href="/") Nevermind
+        section
+            p #[span Already have an account?] #[a(href="/login") Sign in here!]
+
+        

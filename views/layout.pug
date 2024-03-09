@@ -1,0 +1,9 @@
+doctype html
+html
+    head 
+        title Project 2
+        link(rel='stylesheet', type='text/css', href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css")
+    body
+        if !hide_signin
+            a(href="/login") Sign in
+        block content
