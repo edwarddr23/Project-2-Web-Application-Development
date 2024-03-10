@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router();
+const bcrypt = require('bcryptjs')
 
 router.get('/login', async(req, res) => {
     res.render('login', {hide_signin: true})
@@ -28,13 +29,17 @@ router.post('/signup', async(req, res) => {
     
     // Check if the submitted username is already in the DB. If so, it will rerender the same page but let the user know that username exists already.
     const curr_us_found = await req.db.findUserByUsername(username);
-    if(curr_us_found !== undefined){
+    if(curr_us_found){
         res.render('signup', {hide_signin: true, message: 'An account with this username already exists'});
         return;
     }
 
+    const salt = bcrypt.genSaltSync(10);
+    // The salt is prepended to the hash in format [salt].[hash] by this function.
+    const hash = bcrypt.hashSync(p1, salt);
+
     const id = await req.db.createUser(req.body);
-    await req.db.recordUser(req.body, id);
+    await req.db.recordUser(req.body, id, hash);
     res.redirect("/");
 })
 

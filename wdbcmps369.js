@@ -38,7 +38,7 @@ class ContactsDB {
         // console.log('wdbcmps369: initialize(): thing:', thing);
         if(cmps369_found === undefined){
             const id = await this.createUser();
-            await this.recordUser({username: 'cmps369', password: 'rcnj'}, id);
+            await this.recordUser({username: 'cmps369'}, id, 'rcnj');
         }
     }
 
@@ -111,12 +111,12 @@ class ContactsDB {
         );
     }
 
-    async recordUser(user, id) {
+    async recordUser(user, id, password) {
         await this.db.update('Users', [
             {column: 'f_name', value: user.first},
             {column: 'l_name', value: user.last},
             {column: 'username', value: user.username},
-            {column: 'password', value: user.password}],
+            {column: 'password', value: password}],
         [{column: 'id', value: id}])
     }
 }
