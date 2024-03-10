@@ -6,7 +6,7 @@ router.get('/', async(req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const id = await req.db.createContact(req.body);
+    const id = await req.db.createContact();
     await req.db.recordContact(req.body, id);
     res.redirect("/");
 });

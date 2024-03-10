@@ -23,6 +23,8 @@ block content
             input(name="password2", type="password" required)
         button(type="submit") Sign up 
         a(href="/") Nevermind
+        if message
+            p #{message}
         section
             p #[span Already have an account?] #[a(href="/login") Sign in here!]
 
