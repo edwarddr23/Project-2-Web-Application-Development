@@ -6,8 +6,23 @@ router.get('/login', async(req, res) => {
     res.render('login', {hide_signin: true})
 });
 
-router.post('/login', async() => {
-    console.log('accounts.js: loggin in?');
+router.post('/login', async(req, res) => {
+    console.log('accounts.js: POST(): loggin in?');
+    const username = req.body.username.trim();
+    const p1 = req.body.password.trim();
+    const user = await req.db.findUserByUsername(username);
+    // Test if username is correct.
+    if(user && bcrypt.compareSync(p1, user.password)){
+        req.session.user = user;
+        console.log('accounts.js: POST(): user.f_name:', user.f_name);
+        res.redirect('/');
+        return;
+    }
+    // Test if password is correct.
+    else{
+        res.render('login', {hide_signin: true, message: 'Sorry, couldn\'t sign you in...'});
+        return;
+    }
 })
 
 router.get('/signup', async(req, res) => {
@@ -40,6 +55,10 @@ router.post('/signup', async(req, res) => {
 
     const id = await req.db.createUser(req.body);
     await req.db.recordUser(req.body, id, hash);
+
+    // Start Session.
+    req.session.user = await req.db.findUserById(id);
+
     res.redirect("/");
 })
 

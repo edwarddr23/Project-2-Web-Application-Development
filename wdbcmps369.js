@@ -87,6 +87,15 @@ class ContactsDB {
         }
     }
 
+    async findUserById(id){
+        const i = await this.db.read('Users', [{column: 'id', value: id}]);
+        // If found, return the id. Otherwise return undefined.
+        if(i.length > 0) return i[0];
+        else {
+            return undefined;
+        }
+    }
+
     async recordContact(contact, id) {
         console.log('wdbcmps369: recordContact: contact:', contact);
         const parseCheckboxValue = (checkboxValue) => {
