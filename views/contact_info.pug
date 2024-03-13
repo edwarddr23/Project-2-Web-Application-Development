@@ -1,0 +1,45 @@
+extends layout.pug 
+
+block content 
+    h1 Contact Info 
+    h2 #{contact.f_name} #{contact.l_name} 
+    hr
+    a(href="/") Back to list
+    p
+        b Phone number:#{" "}
+        span #{contact.phone}
+    if contact.contact_by_phone == 1
+        p
+            i May be contacted by phone or text
+    else
+        p 
+            i May NOT be contacted by phone or text
+    hr
+
+    p 
+        b Email address:#{" "}
+        span #{contact.email}
+    if contact.contact_by_email == 1
+        p 
+            i May be contacted by email 
+    else 
+        p 
+            i May NOT be contacted by email
+    hr
+
+
+    p 
+        b Address:
+        section #{contact.street}
+        section #{contact.city}, #{contact.state} #{contact.zip}
+        section #{contact.country}
+        if contact.contact_by_mail == 1
+            p 
+                i May be contacted by mail 
+        else 
+            p 
+                i May NOT be contacted by mail
+    hr
+    a(href="/" + contact.id + "/edit") Edit contact 
+    br
+    a(href="/" + contact.id + "/delete") Delete contact

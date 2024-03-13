@@ -42,6 +42,7 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/contact_list'));
 app.use('/', require('./routes/accounts'));
 app.use('/create', require('./routes/create'));
+app.use('/', require('./routes/contact_id'))
 
 app.listen(3000, () => {
     console.log('Listening on port 3000...');

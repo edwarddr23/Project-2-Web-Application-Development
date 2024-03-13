@@ -15,7 +15,7 @@ block content
         tbody 
             each c, index in contacts 
                 tr
-                    td #{c.f_name} #{c.l_name}
+                    td: a(href="/" + c.id) #{c.f_name} #{c.l_name}
                     td #{c.phone} 
                     td #{c.email} 
                     td #{c.street} #{c.city}, #{c.state} #{c.zip} #{c.country} 

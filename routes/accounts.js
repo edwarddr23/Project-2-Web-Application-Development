@@ -2,19 +2,22 @@ const express = require('express')
 const router = express.Router();
 const bcrypt = require('bcryptjs')
 
+router.get('/logout', async(req, res) => {
+    req.session.user = undefined;
+    res.redirect('/');
+})
+
 router.get('/login', async(req, res) => {
     res.render('login', {hide_signin: true})
 });
 
 router.post('/login', async(req, res) => {
-    console.log('accounts.js: POST(): loggin in?');
     const username = req.body.username.trim();
     const p1 = req.body.password.trim();
     const user = await req.db.findUserByUsername(username);
     // Test if username is correct.
     if(user && bcrypt.compareSync(p1, user.password)){
         req.session.user = user;
-        console.log('accounts.js: POST(): user.f_name:', user.f_name);
         res.redirect('/');
         return;
     }

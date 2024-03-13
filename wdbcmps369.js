@@ -78,9 +78,18 @@ class ContactsDB {
         return contacts;
     }
 
+    async findContactById(id) {
+        const c = await this.db.read('Contact', [{column: 'id', value: id}]);
+        // If found, return the contact data. Otherwise return undefined.
+        if(c.length > 0) return c[0];
+        else {
+            return undefined;
+        }
+    }
+
     async findUserByUsername(username) {
         const us = await this.db.read('Users', [{column: 'username', value: username}]);
-        // If found, return the username. Otherwise return undefined.
+        // If found, return the user data. Otherwise return undefined.
         if(us.length > 0) return us[0];
         else {
             return undefined;
@@ -89,14 +98,14 @@ class ContactsDB {
 
     async findUserById(id){
         const i = await this.db.read('Users', [{column: 'id', value: id}]);
-        // If found, return the id. Otherwise return undefined.
+        // If found, return the user data. Otherwise return undefined.
         if(i.length > 0) return i[0];
         else {
             return undefined;
         }
     }
 
-    async recordContact(contact, id) {
+    async recordContact(contact, contact_id, user_id) {
         console.log('wdbcmps369: recordContact: contact:', contact);
         const parseCheckboxValue = (checkboxValue) => {
             if(checkboxValue === undefined) return false
@@ -115,8 +124,9 @@ class ContactsDB {
             {column: 'country', value: contact.country},
             {column: 'contact_by_phone', value: parseCheckboxValue(contact.contact_by_phone)},
             {column: 'contact_by_email', value: parseCheckboxValue(contact.contact_by_email)},
-            {column: 'contact_by_mail', value: parseCheckboxValue(contact.contact_by_mail)}],
-            [{column: 'id', value: id}]
+            {column: 'contact_by_mail', value: parseCheckboxValue(contact.contact_by_mail)},
+            {column: 'user_id', value: user_id}],
+            [{column: 'id', value: contact_id}]
         );
     }
 
@@ -127,6 +137,10 @@ class ContactsDB {
             {column: 'username', value: user.username},
             {column: 'password', value: password}],
         [{column: 'id', value: id}])
+    }
+
+    async deleteContactById(contact_id){
+        await this.db.delete('Contact', [{column: 'id', value: contact_id}]);
     }
 }
 
