@@ -1,4 +1,4 @@
-Simple webapp that implements SQLite, Express.js, and Pug.
+Simple webapp that implements SQLite database, Express.js, and Pug. Is NOT designed to be a secure site, but it does implement bcrypt encryption for passwords with salting and hashing.
 _______________________________________________________
 TO RUN:
 1. Open a Command Prompt
