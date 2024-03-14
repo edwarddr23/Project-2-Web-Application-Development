@@ -1,5 +1,6 @@
 require('dotenv').config();
 const Database = require('dbcmps369');
+const bcrypt = require('bcryptjs');
 
 class ContactsDB {
     constructor() {
@@ -38,7 +39,9 @@ class ContactsDB {
         // console.log('wdbcmps369: initialize(): thing:', thing);
         if(cmps369_found === undefined){
             const id = await this.createUser();
-            await this.recordUser({username: 'cmps369'}, id, 'rcnj');
+            const salt = bcrypt.genSaltSync(10);
+            const hash = bcrypt.hashSync('rcnj', salt);
+            await this.recordUser({username: 'cmps369'}, id, hash);
         }
     }
 
