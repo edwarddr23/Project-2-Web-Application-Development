@@ -2,6 +2,8 @@ Simple webapp that implements SQLite database, Express.js, and Pug. Is NOT desig
 _______________________________________________________
 TO RUN:
 1. Open a Command Prompt
-2. Type in "node .\p2.js"
-3. Open a browser
-4. Enter "http://localhost:3000" into the URL
+2. Navigate to the project's root directory
+3. Enter "npm install" to install all the necessary packages and dependencies.
+4. Enter "node .\p2.js"
+5. Open a browser
+6. Enter "http://localhost:3000" into the URL to open the local web server.
