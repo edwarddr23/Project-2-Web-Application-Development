@@ -15,13 +15,12 @@ router.post('/login', async(req, res) => {
     const username = req.body.username.trim();
     const p1 = req.body.password.trim();
     const user = await req.db.findUserByUsername(username);
-    // Test if username is correct.
+    // Test if username is correct and if password is correct.
     if(user && bcrypt.compareSync(p1, user.password)){
         req.session.user = user;
         res.redirect('/');
         return;
     }
-    // Test if password is correct.
     else{
         res.render('login', {hide_signin: true, message: 'Sorry, couldn\'t sign you in...'});
         return;
@@ -53,10 +52,11 @@ router.post('/signup', async(req, res) => {
     }
 
     const salt = bcrypt.genSaltSync(10);
+    console.log('accounts.js: salt:', salt);
     // The salt is prepended to the hash in format [salt].[hash] by this function.
     const hash = bcrypt.hashSync(p1, salt);
 
-    const id = await req.db.createUser(req.body);
+    const id = await req.db.createUser();
     await req.db.recordUser(req.body, id, hash);
 
     // Start Session.
