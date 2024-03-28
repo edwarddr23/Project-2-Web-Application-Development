@@ -7,33 +7,33 @@ block content
             legend Basic Info
             section
                 label(for="first") First Name:
-                input(name="first")
+                input(name="first" type="text" required)
             section
                 label(for="last") Last Name:
-                input(name="last")
+                input(name="last" type="text" required)
             section
                 label(for="phone") Phone:
-                input(name="phone")
+                input(name="phone" type="text" required)
             section
                 label(for="email") Email:
-                input(name="email")
+                input(name="email" type="text" required)
         fieldset 
             legend Address 
             section 
                 label(for="street") Street: 
-                input(name="street")
+                input(name="street" type="text" required)
             section 
                 label(for="city") City: 
-                input(name="city")
+                input(name="city" type="text" required)
             section 
                 label(for="state") State: 
-                input(name="state")
+                input(name="state" type="text" required)
             section 
                 label(for="zip") Zip: 
-                input(name="zip")
+                input(name="zip" type="text" required)
             section 
                 label(for="country") Country: 
-                input(name="country")
+                input(name="country" type="text" required)
         fieldset 
             legend Contact Preferences
             section 
@@ -45,5 +45,5 @@ block content
             section 
                 input(type="checkbox", name="contact_by_mail")
                 label(for="contact_by_mail") Contact by Mail
-        button(type="submit") Add
-        a(href="/") Cancel
+        button(type="submit" class="button") Add
+        a(href="/" class="button") Cancel

@@ -10,6 +10,11 @@ const logged_in = (req, res, next) => {
     }
 }
 
+// This is to prevent processing a favicon request instead of an actual contact_id.
+router.get('/favicon.ico', async(req, res) => {
+    // console.log('Ignoring \"favicon.ico\" request...');
+})
+
 router.get('/:contact_id', async(req, res) => {
     const contact = await req.db.findContactById(req.params.contact_id);
     res.render('contact_info', {contact: contact});

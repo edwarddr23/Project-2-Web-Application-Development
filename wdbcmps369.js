@@ -35,14 +35,14 @@ class ContactsDB {
             {name: 'password', type: 'TEXT'}
         ], 'id');
 
-        const cmps369_found = await this.findUserByUsername('cmps369');
-        // console.log('wdbcmps369: initialize(): thing:', thing);
-        if(cmps369_found === undefined){
-            const id = await this.createUser();
-            const salt = bcrypt.genSaltSync(10);
-            const hash = bcrypt.hashSync('rcnj', salt);
-            await this.recordUser({username: 'cmps369'}, id, hash);
-        }
+        // const cmps369_found = await this.findUserByUsername('cmps369');
+        // // console.log('wdbcmps369: initialize(): thing:', thing);
+        // if(cmps369_found === undefined){
+        //     const id = await this.createUser();
+        //     const salt = bcrypt.genSaltSync(10);
+        //     const hash = bcrypt.hashSync('rcnj', salt);
+        //     await this.recordUser({username: 'cmps369'}, id, hash);
+        // }
     }
 
     async createContact() {
